@@ -26,11 +26,17 @@ Nombre igual a "Mi segundo ejemplo"
 6. Sin importar si se trata de un numero par o impar de vertices, dibujar en
 otra ventana (mismo programa) las siguientes primitivas
 GL_LINE_STRIP, GL_TRIANGLE_FAN, GL_QUADS, GL_QUADS_STRIP
+
+7. Considerar el orden de los vertices para conservar un sentido antihorario
+
+8. Para el caso de los triangulos, cuadrados y poligonos, probar el modo de visualizacion
+para que la figura sea en modo relleno (GL_FILL)
 */
 
 void init(void)
 {
-	glPolygonMode(GL_FRONT,GL_LINE);        //CARA FRONTAL Y SE VISUALIZAN EN MODO ALAMBRE
+	glPolygonMode(GL_FRONT,GL_FILL);          //PROBANDO MODO DE RELLENO GL_FILL
+	//glPolygonMode(GL_FRONT,GL_LINE);        //CARA FRONTAL Y SE VISUALIZAN EN MODO ALAMBRE
 	glClearColor(1.0, 1.0, 1.0, 0.0);       // DEFINE COLOR DE FONDO
 	glColor3f(0.0f, 0.0f, 1.0f);            // DEFINE COLOR DE PUNTOS
 	glPointSize(8.0);                       // DEFINE TAMAÑO DE PUNTO
@@ -145,13 +151,11 @@ glColor3f(0.0f, 1.0f, 1.0f);    // COLOR DE LOS TRAZOS
 void figura7_GL_TRIANGLE_STRIP(void)
 {
   glClear(GL_COLOR_BUFFER_BIT);
-glColor3f(0.0f, 1.0f, 1.0f);    // COLOR DE LOS TRAZOS
-	glBegin(GL_POLYGON);
+glColor3f(1.0f, 0.0f, 0.0f);    // COLOR DE LOS TRAZOS
+	glBegin(GL_TRIANGLE_STRIP);
       glVertex3f(200.0f,300.0f,0.0f);
-      glVertex3f(500.0f,300.0f,0.0f);
-      glVertex3f(500.0f,100.0f,0.0f);
-      glVertex3f(200.0f,100.0f,0.0f);
-
+      glVertex3f(500.0f,50.0f,0.0f);
+      glVertex3f(400.0f,200.0f,0.0f);
     glEnd();
 
 	glFlush();
@@ -160,12 +164,11 @@ glColor3f(0.0f, 1.0f, 1.0f);    // COLOR DE LOS TRAZOS
 void figura8_GL_TRIANGLE_FAN(void)
 {
   glClear(GL_COLOR_BUFFER_BIT);
-glColor3f(0.0f, 1.0f, 1.0f);    // COLOR DE LOS TRAZOS
-	glBegin(GL_POLYGON);
+glColor3f(0.0f, 1.0f, 0.0f);    // COLOR DE LOS TRAZOS
+	glBegin(GL_TRIANGLE_FAN);
       glVertex3f(200.0f,300.0f,0.0f);
       glVertex3f(500.0f,300.0f,0.0f);
-      glVertex3f(500.0f,100.0f,0.0f);
-      glVertex3f(200.0f,100.0f,0.0f);
+      glVertex3f(300.0f,100.0f,0.0f);
 
     glEnd();
 
@@ -175,8 +178,8 @@ glColor3f(0.0f, 1.0f, 1.0f);    // COLOR DE LOS TRAZOS
 void figura9_GL_QUADS(void)
 {
   glClear(GL_COLOR_BUFFER_BIT);
-glColor3f(0.0f, 1.0f, 1.0f);    // COLOR DE LOS TRAZOS
-	glBegin(GL_POLYGON);
+glColor3f(1.0f, 0.0f, 1.0f);    // COLOR DE LOS TRAZOS
+	glBegin(GL_QUADS);
       glVertex3f(200.0f,300.0f,0.0f);
       glVertex3f(500.0f,300.0f,0.0f);
       glVertex3f(500.0f,100.0f,0.0f);
@@ -190,12 +193,14 @@ glColor3f(0.0f, 1.0f, 1.0f);    // COLOR DE LOS TRAZOS
 void figura10_GL_QUADS_STRIP(void)
 {
   glClear(GL_COLOR_BUFFER_BIT);
-glColor3f(0.0f, 1.0f, 1.0f);    // COLOR DE LOS TRAZOS
-	glBegin(GL_POLYGON);
+glColor3f(1.0f, 0.0f, 1.0f);    // COLOR DE LOS TRAZOS
+	glBegin(GL_QUAD_STRIP);
       glVertex3f(200.0f,300.0f,0.0f);
       glVertex3f(500.0f,300.0f,0.0f);
       glVertex3f(500.0f,100.0f,0.0f);
       glVertex3f(200.0f,100.0f,0.0f);
+			glVertex3f(400.0f,300.0f,0.0f);
+      glVertex3f(300.0f,300.0f,0.0f);
 
     glEnd();
 
@@ -224,7 +229,7 @@ int main(int argc, char** argv)
 		glutInitWindowSize(500, 500);
 		glutInitWindowPosition(50, 50);
 		glutCreateWindow("Mi segundo ejemplo");
-		glutDisplayFunc(figura8_GL_TRIANGLE_FAN);
+		glutDisplayFunc(figura10_GL_QUADS_STRIP);
 		init();
 		glutMainLoop();
 
