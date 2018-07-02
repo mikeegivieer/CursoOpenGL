@@ -216,7 +216,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(640, 480);
     glutInitWindowPosition(200, 100);
     glutCreateWindow("Mi primer ejemplo");
-    glutDisplayFunc(figura6_GL_POLYGON);
+    glutDisplayFunc(figura1_GL_POINTS);
     init();
 
 		/*
@@ -229,7 +229,7 @@ int main(int argc, char** argv)
 		glutInitWindowSize(500, 500);
 		glutInitWindowPosition(50, 50);
 		glutCreateWindow("Mi segundo ejemplo");
-		glutDisplayFunc(figura10_GL_QUADS_STRIP);
+		glutDisplayFunc(figura8_GL_TRIANGLE_FAN);
 		init();
 		glutMainLoop();
 
