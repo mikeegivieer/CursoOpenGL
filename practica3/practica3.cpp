@@ -1,19 +1,24 @@
 #include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <stdlib.h>
 #include <math.h>
 
 /*  Practica 3
 
-1. Disela un robot en 2d sobre una hoja cuadriculada o milimetrica, utilizando
-las primitivas que ya conoces com: poligonos cuadros, triangulos, lineas y puntos.
+1. Disela un robot en 2d sobre una hoja cuadriculada o milimetrica,
+ utilizandolas primitivas que ya conoces com: poligonos cuadros,
+ triangulos, lineas y puntos.
 
-2. Utilia el codigo de la practica anterior de nombre 02_Transformaciones_calculo.cpp
+2. Utilia el codigo de la practica anterior de nombre
+02_Transformaciones_calculo.cpp
 
-3. Ajusta las variables (rango) de las coordenasa de vision del mundo parapoder trabajar
-sobre los 4 cuadrantes del plano cartsiano
+3. Ajusta las variables (rango) de las coordenasa de vision
+del mundo parapoder trabajar sobre los 4 cuadrantes del
+plano cartsiano
 
-4. Identifica los valores de los certices que definen las partes del robot(x,y) en tu hoja
-de cuadricula o milimetrica. Recuerda que el valor de z lo asumimos como 0 para todos
+4. Identifica los valores de los vertices que definen las
+partes del robot(x,y) en tu hoja de cuadricula o milimetrica.
+Recuerda que el valor de z lo asumimos como 0 para todos
 los vertices
 
 ****************** Actividades (Entregable 1) **************************
@@ -52,22 +57,212 @@ repetido de FUNCIONES
 */
 
 // Tamaño inicial de la ventana de despliegue
-GLsizei winWidth=900, winHeight=600;
+GLsizei winWidth=500, winHeight=500;
 
 // rango para las coordenadas de visión del mundo
-GLfloat xwcMin=0.0, xwcMax=1200.0;
-GLfloat ywcMin=0.0, ywcMax=900.0;
-
+GLfloat xwcMin=-500.0, xwcMax=500.0;
+GLfloat ywcMin=-500.0, ywcMax=500.0;
 
 
 void init(void)
 {
-	glClearColor(1.0,1.0,1.0,0.0);
+  glClearColor(1.0,1.0,1.0,0.0);
+  glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+  gluOrtho2D(xwcMin, xwcMax, ywcMin, ywcMax);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+
+
+void cabeza(){
+	//Cabeza
+  glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
+	glBegin(GL_QUADS);
+	glVertex3f(-60.0,260.0,0.0);
+	glVertex3f(-60.0,360.0,0.0);
+	glVertex3f(80.0,360.0,0.0);
+	glVertex3f(80.0,260.0,0.0);
+	glEnd();
+  //Cuello
+	glColor3f(0.0,0.0,0.0);//Negro
+	glBegin(GL_QUADS);
+	glVertex3f(-20.0,220.0,0.0);
+	glVertex3f(-20.0,260.0,0.0);
+	glVertex3f(40.0,260.0,0.0);
+	glVertex3f(40.0,220.0,0.0);
+	glEnd();
+	//Ojo derecho
+  glColor3f(255/255.0f,140/255.0f,0/255.0f);//Dark orange
+  glBegin(GL_QUADS);
+  glVertex3f(20.0,320.0,0.0);
+  glVertex3f(20.0,340.0,0.0);
+  glVertex3f(60.0,340.0,0.0);
+  glVertex3f(60.0,320.0,0.0);
+  glEnd();
+//Ojo izquierdo
+glColor3f(255/255.0f,140/255.0f,0/255.0f);//Dark orange
+glBegin(GL_QUADS);
+glVertex3f(-40.0,320.0,0.0);
+glVertex3f(-40.0,340.0,0.0);
+glVertex3f(0.0,340.0,0.0);
+glVertex3f(0.0,320.0,0.0);
+glEnd();
+//Boca
+glColor3f(255/255.0f,140/255.0f,0/255.0f);//Dark orange
+glBegin(GL_QUADS);
+glVertex3f(-40.0,280.0,0.0);
+glVertex3f(-40.0,300.0,0.0);
+glVertex3f(60.0,300.0,0.0);
+glVertex3f(60.0,280.0,0.0);
+glEnd();
+	glFlush();
+}
+
+void torso(){
+	//torso
+  glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
+	glBegin(GL_QUADS);
+	glVertex3f(-120.0,60.0,0.0);
+	glVertex3f(-120.0,220.0,0.0);
+	glVertex3f(140.0,220.0,0.0);
+	glVertex3f(140.0,60.0,0.0);
+	glEnd();
+	//Cintura
+	glColor3f(0.0,0.0,0.0);//Negro
+	glBegin(GL_QUADS);
+	glVertex3f(-60.0,-20.0,0.0);
+	glVertex3f(-60.0,60.0,0.0);
+	glVertex3f(80.0,60.0,0.0);
+	glVertex3f(80.0,-20.0,0.0);
+	glEnd();
+	//Cadera
+	glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
+	glBegin(GL_QUADS);
+	glVertex3f(-100.0,-120.0,0.0);
+	glVertex3f(-100.0,-20.0,0.0);
+	glVertex3f(120.0,-20.0,0.0);
+	glVertex3f(120.0,-120.0,0.0);
+	glEnd();
+	glFlush();
+}
+
+void brazo(){
+	//Hombro
+	glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
+	glBegin(GL_QUADS);
+	glVertex3f(140.0,160.0,0.0);
+	glVertex3f(140.0,220.0,0.0);
+	glVertex3f(280.0,220.0,0.0);
+	glVertex3f(280.0,160.0,0.0);
+	glEnd();
+	//Brazo
+	glColor3f(0.0,0.0,0.0);//Negro
+	glBegin(GL_QUADS);
+	glVertex3f(180.0,-60.0,0.0);
+	glVertex3f(180.0,160.0,0.0);
+	glVertex3f(240.0,160.0,0.0);
+	glVertex3f(240.0,-60.0,0.0);
+	glEnd();
+	//Mano
+	glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
+	glBegin(GL_QUADS);
+	glVertex3f(160.0,-120.0,0.0);
+	glVertex3f(160.0,-60.0,0.0);
+	glVertex3f(260.0,-60.0,0.0);
+	glVertex3f(260.0,-120.0,0.0);
+	glEnd();
+	//Dedo gordo
+	glColor3f(190/255.0f,190/255.0f,190/255.0f);//gray
+	glBegin(GL_QUADS);
+	glVertex3f(140.0,-100.0,0.0);
+	glVertex3f(140.0,-60.0,0.0);
+	glVertex3f(160.0,-60.0,0.0);
+	glVertex3f(160.0,-100.0,0.0);
+	glEnd();
+	//Dedo 1
+	glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
+	glBegin(GL_QUADS);
+	glVertex3f(240.0,-180.0,0.0);
+	glVertex3f(240.0,-120.0,0.0);
+	glVertex3f(260.0,-120.0,0.0);
+	glVertex3f(260.0,-180.0,0.0);
+	glEnd();
+	//Dedo 2
+	glColor3f(190/255.0f,190/255.0f,190/255.0f);//gray
+	glBegin(GL_QUADS);
+	glVertex3f(220.0,-180.0,0.0);
+	glVertex3f(220.0,-120.0,0.0);
+	glVertex3f(240.0,-120.0,0.0);
+	glVertex3f(240.0,-180.0,0.0);
+	glEnd();
+	//Dedo 3
+	glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
+	glBegin(GL_QUADS);
+	glVertex3f(200.0,-180.0,0.0);
+	glVertex3f(200.0,-120.0,0.0);
+	glVertex3f(220.0,-120.0,0.0);
+	glVertex3f(220.0,-180.0,0.0);
+	glEnd();
+	//Dedo 4
+	glColor3f(190/255.0f,190/255.0f,190/255.0f);//gray
+	glBegin(GL_QUADS);
+	glVertex3f(180.0,-180.0,0.0);
+	glVertex3f(180.0,-120.0,0.0);
+	glVertex3f(200.0,-120.0,0.0);
+	glVertex3f(200.0,-180.0,0.0);
+	glEnd();
+
+	glFlush();
+}
+
+void pierna(){
+	//Pierna
+	glColor3f(0.0,0.0,0.0);//Negro
+	glBegin(GL_QUADS);
+	glVertex3f(40.0,-360.0,0.0);
+	glVertex3f(40.0,-120.0,0.0);
+	glVertex3f(100.0,-120.0,0.0);
+	glVertex3f(100.0,-360.0,0.0);
+	glEnd();
+	//Zapato
+	glColor3f(190/255.0f,190/255.0f,190/255.0f);//gray
+	glBegin(GL_QUADS);
+	glVertex3f(40.0,-400.0,0.0);
+	glVertex3f(40.0,-360.0,0.0);
+	glVertex3f(140.0,-360.0,0.0);
+	glVertex3f(140.0,-400.0,0.0);
+	glEnd();
+	glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
+	glBegin(GL_QUADS);
+	glVertex3f(40.0,-460.0,0.0);
+	glVertex3f(40.0,-400.0,0.0);
+	glVertex3f(180.0,-400.0,0.0);
+	glVertex3f(180.0,-460.0,0.0);
+	glEnd();
+
+	glFlush();
 }
 
 
 
 void displayFcn(void){
+cabeza();
+torso();
+brazo();
+glPushMatrix();
+glTranslatef(20.0f,1.0f,1.0f);
+glScalef(1, -1, 1);
+glRotated(180.0,0.0,0.0,1.0);
+brazo();
+glPopMatrix();
+pierna();
+glPushMatrix();
+glTranslatef(20.0f,1.0f,1.0f);
+glScalef(1, -1, 1);
+glRotated(180.0,0.0,0.0,1.0);
+pierna();
+glPopMatrix();
 
 	glFlush();
 }
