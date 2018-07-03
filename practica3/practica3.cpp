@@ -77,6 +77,8 @@ void init(void)
 
 void cabeza(){
 	//Cabeza
+
+
   glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
 	glBegin(GL_QUADS);
 	glVertex3f(-60.0,260.0,0.0);
@@ -84,6 +86,14 @@ void cabeza(){
 	glVertex3f(80.0,360.0,0.0);
 	glVertex3f(80.0,260.0,0.0);
 	glEnd();
+
+	// glColor3f(1.0f,0.0f,0.0f);//red
+	// glBegin(GL_TRIANGLES);
+	// glVertex3f(-60.0,260.0,0.0);
+	// glVertex3f(-60.0,360.0,0.0);
+	// glVertex3f(80.0,360.0,0.0);
+	// glEnd();
+
   //Cuello
 	glColor3f(0.0,0.0,0.0);//Negro
 	glBegin(GL_QUADS);
@@ -128,6 +138,13 @@ void torso(){
 	glVertex3f(140.0,220.0,0.0);
 	glVertex3f(140.0,60.0,0.0);
 	glEnd();
+
+	// glColor3f(1.0f,0.0f,0.0f);//red
+	// glBegin(GL_TRIANGLES);
+	// glVertex3f(-120.0,60.0,0.0);
+	// glVertex3f(-120.0,220.0,0.0);
+	// glVertex3f(140.0,220.0,0.0);
+	// glEnd();
 	//Cintura
 	glColor3f(0.0,0.0,0.0);//Negro
 	glBegin(GL_QUADS);
@@ -136,6 +153,13 @@ void torso(){
 	glVertex3f(80.0,60.0,0.0);
 	glVertex3f(80.0,-20.0,0.0);
 	glEnd();
+
+	// glColor3f(1.0f,0.0f,0.0f);//red
+	// glBegin(GL_TRIANGLES);
+	// glVertex3f(-60.0,60.0,0.0);
+	// glVertex3f(80.0,60.0,0.0);
+	// glVertex3f(80.0,-20.0,0.0);
+	// glEnd();
 	//Cadera
 	glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
 	glBegin(GL_QUADS);
@@ -143,7 +167,14 @@ void torso(){
 	glVertex3f(-100.0,-20.0,0.0);
 	glVertex3f(120.0,-20.0,0.0);
 	glVertex3f(120.0,-120.0,0.0);
-	glEnd();
+  glEnd();
+	// glColor3f(1.0f,0.0f,0.0f);//red
+	// glBegin(GL_TRIANGLES);
+	// glVertex3f(-100.0,-20.0,0.0);
+	// glVertex3f(120.0,-20.0,0.0);
+	// glVertex3f(120.0,-120.0,0.0);
+	// glEnd();
+
 	glFlush();
 }
 
@@ -156,6 +187,13 @@ void brazo(){
 	glVertex3f(280.0,220.0,0.0);
 	glVertex3f(280.0,160.0,0.0);
 	glEnd();
+
+	// glColor3f(1.0f,0.0f,0.0f);//red
+	// glBegin(GL_TRIANGLES);
+	// glVertex3f(140.0,160.0,0.0);
+	// glVertex3f(140.0,220.0,0.0);
+	// glVertex3f(280.0,220.0,0.0);
+	// glEnd();
 	//Brazo
 	glColor3f(0.0,0.0,0.0);//Negro
 	glBegin(GL_QUADS);
@@ -164,6 +202,13 @@ void brazo(){
 	glVertex3f(240.0,160.0,0.0);
 	glVertex3f(240.0,-60.0,0.0);
 	glEnd();
+
+	// glColor3f(1.0f,0.0f,0.0f);//red
+	// glBegin(GL_TRIANGLES);
+	// glVertex3f(180.0,-60.0,0.0);
+	// glVertex3f(180.0,160.0,0.0);
+	// glVertex3f(240.0,160.0,0.0);
+	// glEnd();
 	//Mano
 	glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
 	glBegin(GL_QUADS);
@@ -172,6 +217,13 @@ void brazo(){
 	glVertex3f(260.0,-60.0,0.0);
 	glVertex3f(260.0,-120.0,0.0);
 	glEnd();
+
+	// glColor3f(1.0f,0.0f,0.0f);//red
+	// glBegin(GL_TRIANGLES);
+	// glVertex3f(160.0,-60.0,0.0);
+	// glVertex3f(260.0,-60.0,0.0);
+	// glVertex3f(260.0,-120.0,0.0);
+	// glEnd();
 	//Dedo gordo
 	glColor3f(190/255.0f,190/255.0f,190/255.0f);//gray
 	glBegin(GL_QUADS);
@@ -225,6 +277,14 @@ void pierna(){
 	glVertex3f(100.0,-120.0,0.0);
 	glVertex3f(100.0,-360.0,0.0);
 	glEnd();
+
+	// glColor3f(1.0f,0.0f,0.0f);//red
+	// glBegin(GL_TRIANGLES);
+	// glVertex3f(40.0,-120.0,0.0);
+	// glVertex3f(100.0,-120.0,0.0);
+	// glVertex3f(100.0,-360.0,0.0);
+	// glEnd();
+
 	//Zapato
 	glColor3f(190/255.0f,190/255.0f,190/255.0f);//gray
 	glBegin(GL_QUADS);
@@ -233,6 +293,14 @@ void pierna(){
 	glVertex3f(140.0,-360.0,0.0);
 	glVertex3f(140.0,-400.0,0.0);
 	glEnd();
+
+		// glColor3f(1.0f,0.0f,0.0f);//red
+		// glBegin(GL_TRIANGLES);
+		// glVertex3f(40.0,-400.0,0.0);
+		// glVertex3f(40.0,-360.0,0.0);
+		// glVertex3f(140.0,-360.0,0.0);
+		// glEnd();
+
 	glColor3f(112/255.0f,128/255.0f,144/255.0f);//slate gray
 	glBegin(GL_QUADS);
 	glVertex3f(40.0,-460.0,0.0);
@@ -240,6 +308,13 @@ void pierna(){
 	glVertex3f(180.0,-400.0,0.0);
 	glVertex3f(180.0,-460.0,0.0);
 	glEnd();
+	//
+	// glColor3f(1.0f,0.0f,0.0f);//red
+	// glBegin(GL_TRIANGLES);
+	// glVertex3f(40.0,-400.0,0.0);
+	// glVertex3f(180.0,-400.0,0.0);
+	// glVertex3f(180.0,-460.0,0.0);
+	// glEnd();
 
 	glFlush();
 }
@@ -267,6 +342,40 @@ glPopMatrix();
 	glFlush();
 }
 
+void displayFcn2(void){
+glClear(GL_COLOR_BUFFER_BIT);
+glClearColor(1.0,0.1,0.1,0);
+torso();
+glPushMatrix();
+glTranslatef(1.0,-170.0,1.0);
+cabeza();
+glPopMatrix();
+glPushMatrix();
+glScalef(1.5,1.5,1);
+glRotated(90.0,0.0,0.0,1.0);
+brazo();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(20.0f,1.0f,1.0f);
+glScalef(1, -1, 1);
+glRotated(180.0,0.0,0.0,1.0);
+brazo();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(1.0,100.0,1.0);
+pierna();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(20.0f,1.0f,1.0f);
+glScalef(1, -1, 1);
+glRotated(180.0,0.0,0.0,1.0);
+pierna();
+glPopMatrix();
+
+	glFlush();
+}
+
+
 
 // FUNCIÓN QUE REAJUSTA EL TAMAÑO DE LA VENTANA
 void winReshapeFcn(GLint newWidth, GLint newHeight)
@@ -288,9 +397,16 @@ int main(int argc, char **argv)
 	glutInitWindowSize(winWidth,winHeight);
 	glutCreateWindow("Robot");
 	init();
-
 	glutDisplayFunc(displayFcn);
 	glutReshapeFunc(winReshapeFcn);
+
+
+  init();
+	glutInitWindowPosition(500,50);
+	glutInitWindowSize(winWidth,winHeight);
+	glutCreateWindow("Robot Nueva version");
+	init();
+	glutDisplayFunc(displayFcn2);
 
 	glutMainLoop();
 }
