@@ -1,7 +1,7 @@
 #include <GL/glut.h>
 
 /*/
-
+    
 **/
 
 
@@ -14698,14 +14698,15 @@ void vendedor_completo(){
 
 
 
-int main (int argc, char **argv) {
+      int main (int argc, char **argv) {
 
-glutInit(&argc, argv);
+      glutInit(&argc, argv);
 
 glutInitWindowSize(400,400);
-glutCreateWindow("ESCENA 2D");
+glutCreateWindow("Dibujo");
 inicializa();
-glutDisplayFunc(vendedor_completo);
+glutDisplayFunc(temporada);
+
 
 glutMainLoop();
 
