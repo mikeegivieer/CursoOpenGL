@@ -9,6 +9,7 @@ using namespace std;
 typedef enum{F1,F2,F3,F4,F5,F6,F7,F8,F9,C1,C2,C3,C4,C5,C6,C7,C8,C9,E1,E2,D1,D2,S1,S2}opcionMenu;
 
 int bandera1=0, bandera2=0;
+int luz=1;
 
 	//Matriz de colores
 	float colores[4][3]=
@@ -32,11 +33,12 @@ int bandera1=0, bandera2=0;
 
 void luzAmbiental(void)
 {
-	GLfloat l_difusa[]={0.5f, 0.5f, 0.5f, 0.0f};
-	GLfloat l_especular[]={0.5f, 0.5f, 0.5f, 0.0f};
+	GLfloat l_difusa[]={ 0.780392f, 0.568627f, 0.113725f, 1.0f };
+	GLfloat l_especular[]={ 0.992157f, 0.941176f, 0.807843f, 1.0f };
 	GLfloat l_posicion[]={1.0, 1.0, 1.0, 0.0};
 
-	GLfloat l_ambiente[]={1.0f, 1.0f, 1.0f, 1.0f};
+	GLfloat l_ambiente[]={ 0.329412f, 0.223529f, 0.027451f,1.0f };
+
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT,l_ambiente);
     glLightfv(GL_LIGHT0, GL_AMBIENT, l_ambiente);
 
@@ -47,15 +49,47 @@ void luzAmbiental(void)
 	glEnable (GL_LIGHT0);
 }
 
+void luzAmbiental2(void)
+{
+	GLfloat l_difusa[]={ 0.50754f, 0.50754f, 0.50754f, 1.0f};
+	GLfloat l_especular[]={0.508273f, 0.508273f, 0.508273f, 1.0f };
+
+	GLfloat l_posicion[]={1.0, 1.0, 1.0, 0.0};
+
+	GLfloat l_ambiente[]={ 0.19225f, 0.19225f, 0.19225f, 1.0f };
+
+
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT,l_ambiente);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, l_ambiente);
+
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, l_difusa);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, l_difusa);
+	glLightfv(GL_LIGHT0, GL_POSITION, l_posicion);
+
+	glEnable (GL_LIGHT0);
+}
+
+
+
 void init(void)
 {
 
-
-
+if(luz==0){
+  glDisable(GL_LIGHTING);
+    glDisable(GL_DEPTH_TEST);
 	luzAmbiental();
 	glEnable(GL_LIGHTING);
     glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
+}else{
+  glDisable(GL_LIGHTING);
+    glDisable(GL_DEPTH_TEST);
+  luzAmbiental2();
+	glEnable(GL_LIGHTING);
+    glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+}
+
 }
 
 void cubo(){
@@ -190,6 +224,23 @@ void display2(void)
   glEnable(GL_CULL_FACE);
 	glLoadIdentity();
 
+  if(luz==0){
+    glDisable(GL_LIGHTING);
+      glDisable(GL_DEPTH_TEST);
+  	luzAmbiental();
+  	glEnable(GL_LIGHTING);
+      glEnable(GL_DEPTH_TEST);
+  	glDepthFunc(GL_LEQUAL);
+  }else{
+    glDisable(GL_LIGHTING);
+      glDisable(GL_DEPTH_TEST);
+    luzAmbiental2();
+  	glEnable(GL_LIGHTING);
+      glEnable(GL_DEPTH_TEST);
+  	glDepthFunc(GL_LEQUAL);
+  }
+
+
 
 	glPushMatrix();
 		glRotatef(alpha, 1.0f, 0.0f, 0.0f);
@@ -290,13 +341,15 @@ void menuPosicionCamara(int opcion)
 	{
 		case F1:
 			//Frontal *
-			eyeX=0.0f, eyeY=0.0f, eyeZ=5.0f;
-			oriX=0.0f, oriY=1.0f, oriZ=0.0f;
-			break;
+			// eyeX=0.0f, eyeY=0.0f, eyeZ=5.0f;
+			// oriX=0.0f, oriY=1.0f, oriZ=0.0f;
+     luz=0;
+      break;
 		case F2:
+      luz=1;
 			//Trasera
-			eyeX=0.0f, eyeY=5.0f, eyeZ=1.0f;
-			oriX=0.0f, oriY=1.0f, oriZ=0.0f;
+			// eyeX=0.0f, eyeY=5.0f, eyeZ=1.0f;
+			// oriX=0.0f, oriY=1.0f, oriZ=0.0f;
 			break;
 		case F3:
 		//Lateral Izquierda *
@@ -342,17 +395,13 @@ void creacionMenu(void)
 	int menuCAMARA,menuMain;
 
 	menuCAMARA = glutCreateMenu(menuPosicionCamara);
-	glutAddMenuEntry("Frontal", F1);
+	glutAddMenuEntry("Brass", F1);
 	//glutAddMenuEntry("Trasera", F2);
-	glutAddMenuEntry("Lateral izquiera", F3);
-	glutAddMenuEntry("Lateral derecha", F4);
-	glutAddMenuEntry("Superior", F5);
-	glutAddMenuEntry("Inferior", F6);
-  glutAddMenuEntry("Modo solido", F7);
-	glutAddMenuEntry("Modo alambre", F8);
+	glutAddMenuEntry("Silver", F2);
+
 
 	menuMain = glutCreateMenu(menuPosicionCamara);
-    glutAddSubMenu("Camara", menuCAMARA);
+    glutAddSubMenu("Materiales", menuCAMARA);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
@@ -364,7 +413,7 @@ int main(int argc, char *argv[])
 {
 	glutInit( & argc, argv );
   //inicio del boblebuffering para evitar parpadeo
-glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
+glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
 	glutInitWindowSize(1000, 1000);
 	glutInitWindowPosition(615, 100);
 	glutCreateWindow("AVION");
