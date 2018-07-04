@@ -1,17 +1,23 @@
-//JUAN CARLOS CONDE RAMÍREZ
-//OBJETOS 3D COMPLEJOS + CAMARA + MATERIALES
+/*  Practica 6
+ 1. Modifica la posicion y la orientacion de la camara en la ventana "NAVE 3D: vista... "
+ y crea los menus que sean necesarios para seleccionar enttre los diferentes tipos
+ Frontal, trasera, lateral izquierda, lateral derecha, superior, inferiorr
+ 2. Para esto modifica las variables globales asociadas a la funcion
+ gluLookAt()
+ 3. Agrega un menu para elegir entre modo solido o alambre{}
+*/
 //#include <windows.h>
 #include <GL/glut.h>
 #include <stdio.h>
 
-#include "iostream"
+#include <iostream>
 
 using namespace std;
 
 //Menu de figuras a elegir
 typedef enum{F1,F2,F3,F4,F5,F6,F7,F8,F9,C1,C2,C3,C4,C5,C6,C7,C8,C9,E1,E2,D1,D2,S1,S2}opcionMenu;
 
-
+int bandera1=0, bandera2=0;
 
 	//Matriz de colores
 	float colores[4][3]=
@@ -80,7 +86,12 @@ oriX=0.0f, oriY=1.0f, oriZ=0.0f;
 
 	glPushMatrix();
 		glColor3f(1.0f, 1.0f, 1.0f);
-        glutSolidTeapot(0.5);
+      if(bandera1==0){
+				glutSolidTeapot(0.5);
+			}else{
+				glutWireTeapot(0.5);
+			}
+
 	glPopMatrix();
 
 	glFlush();
@@ -91,6 +102,7 @@ void display2(void)
 {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+if(bandera2==0){
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -98,7 +110,6 @@ void display2(void)
 	gluLookAt(0.0f, 0.0f, 5.0f,
 			  0.0f, 0.0f, 0.0f,
 			  0.0f, 1.0f, 0.0f);
-
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -106,9 +117,28 @@ void display2(void)
 		glRotatef(alpha, 1.0f, 0.0f, 0.0f);
 		glRotatef(beta, 0.0f, 1.0f, 0.0f);
 		glColor3f(1.0f, 1.0f, 1.0f);
-        glutSolidTeapot(0.5);
+			glutSolidTeapot(0.5);
+				//glutWireTeapot(0.5);
 	glPopMatrix();
+}else{
 
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(20.0f, 1.0f, 1.0f, 10.0f);
+	gluLookAt(0.0f, 0.0f, 5.0f,
+				0.0f, 0.0f, 0.0f,
+				0.0f, 1.0f, 0.0f);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	glPushMatrix();
+		glRotatef(alpha, 1.0f, 0.0f, 0.0f);
+		glRotatef(beta, 0.0f, 1.0f, 0.0f);
+		glColor3f(1.0f, 1.0f, 1.0f);
+			//glutSolidTeapot(0.5);
+			glutWireTeapot(0.5);
+	glPopMatrix();
+}
 	glFlush();
 	glutSwapBuffers();
 }
@@ -121,6 +151,8 @@ void onMouse(int button, int state, int x, int y)
 		x0 = x;
 		y0 = y;
 
+// std::cout << " eyeX="<<eyeX <<" eyeY="<<eyeY << "eyeZ="<<eyeZ<<'\n';
+// std::cout << " oriX="<< oriX <<" oriY="<< oriY << " eyeZ=" <<oriZ<<'\n';
 	}
 }
 
@@ -139,36 +171,48 @@ void menuPosicionCamara(int opcion)
 	switch(opcion)
 	{
 		case F1:
-			//Frontal
-		
+			//Frontal *
 			eyeX=0.0f, eyeY=0.0f, eyeZ=5.0f;
 			oriX=0.0f, oriY=1.0f, oriZ=0.0f;
 			break;
 		case F2:
 			//Trasera
-			eyeX=1.0f, eyeY=2.0f, eyeZ=5.0f;
+			eyeX=0.0f, eyeY=5.0f, eyeZ=1.0f;
 			oriX=0.0f, oriY=1.0f, oriZ=0.0f;
 			break;
 		case F3:
-		//Lateral Izquierda
-		eyeX=2.0f, eyeY=1.0f, eyeZ=5.0f;
+		//Lateral Izquierda *
+		eyeX=-10.0f, eyeY=0.0f, eyeZ=0.0f;
 		oriX=0.0f, oriY=1.0f, oriZ=0.0f;
 			break;
 		case F4:
-			//Latera derecha
-			eyeX=0.0f, eyeY=1.0f, eyeZ=5.0f;
-			oriX=1.0f, oriY=1.0f, oriZ=0.0f;
+			//Latera derecha *
+			eyeX=10.0f, eyeY=0.0f, eyeZ=0.0f;
+			oriX=0.0f, oriY=1.0f, oriZ=0.0f;
 		 break;
 		 case F5:
- 			//Superior
-			eyeX=3.0f, eyeY=1.0f, eyeZ=5.0f;
+ 			//Superior *
+			eyeX=0.0f, eyeY=5.0f, eyeZ=1.0f;
 			oriX=0.0f, oriY=1.0f, oriZ=0.0f;
  		 break;
 		 case F6:
  			//Inferior
-			eyeX=5.0f, eyeY=1.0f, eyeZ=5.0f;
+			eyeX=0.0f, eyeY=-5.0f, eyeZ=1.0f;
 			oriX=0.0f, oriY=1.0f, oriZ=0.0f;
  		 break;
+
+		 case F7:
+       bandera1=0;
+			 bandera2=0;
+			 	glutPostRedisplay();
+		   break;
+
+			 case F8:
+	       bandera1=1;
+				 bandera2=1;
+				 	glutPostRedisplay();
+			   break;
+
 	}
 
 	glutPostRedisplay();
@@ -181,11 +225,13 @@ void creacionMenu(void)
 
 	menuCAMARA = glutCreateMenu(menuPosicionCamara);
 	glutAddMenuEntry("Frontal", F1);
-	glutAddMenuEntry("Trasera", F2);
+	//glutAddMenuEntry("Trasera", F2);
 	glutAddMenuEntry("Lateral izquiera", F3);
 	glutAddMenuEntry("Lateral derecha", F4);
 	glutAddMenuEntry("Superior", F5);
 	glutAddMenuEntry("Inferior", F6);
+  glutAddMenuEntry("Modo solido", F7);
+	glutAddMenuEntry("Modo alambre", F8);
 
 	menuMain = glutCreateMenu(menuPosicionCamara);
     glutAddSubMenu("Camara", menuCAMARA);
